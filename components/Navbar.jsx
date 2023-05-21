@@ -1,10 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getProviders, useSession, signIn, signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const { data: session } = useSession();
+  const [providers, setProviders] = useState(null);
+  console.log(session);
+  useEffect(() => {
+    const fetchProviders = async () => {
+      const response = await getProviders();
+      setProviders(response);
+    };
+
+    fetchProviders();
+  }, []);
 
   return (
     <div className="navbar bg-base-100">
@@ -45,7 +56,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-end">
-        {isAuth ? (
+        {session?.user ? (
           <>
             <button className="btn btn-ghost btn-circle">
               <svg
@@ -66,42 +77,54 @@ const Navbar = () => {
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://i.pravatar.cc/" />
+                  <img src={session.user.image} />
                 </div>
               </label>
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52"
               >
-                <li>
-                  <a className="justify-between">
-                    Profile
-                    <span className="badge">New</span>
+                <p className="px-4 py-3 text-xs border-b border-gray-400 font-bold">
+                  {session.user.name} <br />
+                  <a
+                    href={`mailto:{session.user.email}`}
+                    className="link text-primary font-normal underline-offset-4 hover:text-secondary transition-colors duration-300"
+                  >
+                    {session.user.email}
                   </a>
+                </p>
+                <li>
+                  <Link href="/profile" className="justify-between">
+                    My Profile
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/create-prompt" className="justify-between">
+                    Create Prompt
+                  </Link>
                 </li>
                 <li>
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a onClick={() => setIsAuth(false)}>Logout</a>
+                  <a onClick={() => signOut()}>Logout</a>
                 </li>
               </ul>
             </div>
           </>
         ) : (
           <ul className="menu menu-horizontal gap-2">
-            <a
-              className="btn btn-primary capitalize"
-              onClick={() => setIsAuth(true)}
-            >
-              Login
-            </a>
-            <a
-              className="btn btn-ghost capitalize"
-              onClick={() => setIsAuth(true)}
-            >
-              Join us
-            </a>
+            {providers &&
+              Object.values(providers).map((provider, index) => (
+                <a
+                  className="btn btn-primary rounded-3xl capitalize"
+                  onClick={() => signIn(provider.id)}
+                  key={index}
+                >
+                  Join <span className="lowercase mx-1">with</span>{" "}
+                  {provider.name}
+                </a>
+              ))}
           </ul>
         )}
       </div>

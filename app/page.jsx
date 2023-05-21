@@ -27,7 +27,7 @@ const HomePage = () => {
               experience. Join our vibrant community of like-minded individuals
               and take your skills to the next level.
             </p>
-            <button className="btn btn-primary">Goto Feeds</button>
+            <button className="btn btn-primary capitalize">Goto Feeds</button>
           </div>
         </div>
       </div>

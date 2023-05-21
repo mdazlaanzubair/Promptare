@@ -1,6 +1,7 @@
 import "@styles/global.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
+import Provider from "@components/Provider";
 
 export const metadata = {
   title: "Promptare",
@@ -11,9 +12,11 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en" data-theme="corporate">
       <body>
-        <Navbar />
-        <main className="app">{children}</main>
-        <Footer />
+        <Provider>
+          <Navbar />
+          <main className="app">{children}</main>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
