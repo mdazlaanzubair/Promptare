@@ -31,13 +31,7 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Homepage</a>
-            </li>
-            <li>
-              <a>Portfolio</a>
-            </li>
-            <li>
-              <a>About</a>
+              <Link href="/about">About</Link>
             </li>
           </ul>
         </div>
@@ -50,10 +44,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {isAuth ? (
           <>
-            <button
-              className="btn btn-ghost btn-circle"
-              onClick={() => setIsAuth(false)}
-            >
+            <button className="btn btn-ghost btn-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import homeAnimation from "../public/home_animation.png";
+import homeImage from "../public/home_img.png";
 
 const HomePage = () => {
   return (
@@ -8,7 +8,7 @@ const HomePage = () => {
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="max-w-lg">
             <Image
-              src={homeAnimation}
+              src={homeImage}
               className="rounded-lg shadow-2xl hidden lg:block"
               height="0"
               width="0"
