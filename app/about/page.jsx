@@ -6,7 +6,7 @@ const About = () => {
   const services = [
     {
       title: "Discover and Share Prompts:",
-      desc: "Explore a vast collection of prompts and commands contributed by the Promptare community. From creative writing prompts to productivity hacks, you'll find inspiration for various use cases.",
+      desc: `Explore a vast collection of prompts and commands contributed by the Promptare community. From creative writing prompts to productivity hacks, you&apos;ll find inspiration for various use cases.`,
     },
     {
       title: "Connect with Like-minded Individuals:",
@@ -98,7 +98,7 @@ const About = () => {
               Are you ready to take your Chat GPT usage to the next level? Join
               Promptare now and become a part of our growing community. Connect
               with fellow Chat GPT enthusiasts, discover new prompts, and share
-              your knowledge with others. Together, let's unlock the true
+              your knowledge with others. Together, let&apos;s unlock the true
               potential of Chat GPT!
             </p>
           </div>
