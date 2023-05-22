@@ -6,7 +6,7 @@ const About = () => {
   const services = [
     {
       title: "Discover and Share Prompts:",
-      desc: `Explore a vast collection of prompts and commands contributed by the Promptare community. From creative writing prompts to productivity hacks, you&apos;ll find inspiration for various use cases.`,
+      desc: `Explore a vast collection of prompts and commands contributed by the Promptare community. From creative writing prompts to productivity hacks, you'll find inspiration for various use cases.`,
     },
     {
       title: "Connect with Like-minded Individuals:",
