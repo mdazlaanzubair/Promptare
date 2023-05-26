@@ -1,5 +1,6 @@
 import Image from "next/image";
 import homeImage from "../public/home_img.png";
+import Link from "next/link";
 
 const HomePage = () => {
   return (
@@ -27,7 +28,9 @@ const HomePage = () => {
               experience. Join our vibrant community of like-minded individuals
               and take your skills to the next level.
             </p>
-            <button className="btn btn-primary capitalize">Goto Feeds</button>
+            <Link href="/about" className="btn btn-primary capitalize">
+              Explore
+            </Link>
           </div>
         </div>
       </div>

@@ -48,7 +48,7 @@ const About = () => {
               Chat GPT experience. Join a vibrant community of like-minded
               individuals and take your Chat GPT usage to the next level!
             </p>
-            <button className="btn btn-primary">Join Now</button>
+            <Link href="/feeds" className="btn btn-primary btn-outline">Go to Feeds</Link>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ const About = () => {
             />
           </div>
           <div className="max-w-lg lg:max-w-2xl text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
+            <h1 className="text-3xl font-extrabold mb-3">
               Our Mission
             </h1>
             <p className="pb-3">
@@ -76,13 +76,7 @@ const About = () => {
               discussing prompts, commands, and best practices.
             </p>
             <p className="pb-3">
-              <Link
-                href="/signup"
-                className="link text-primary font-bold underline-offset-4 hover:text-secondary transition-colors duration-300"
-              >
-                Sign up
-              </Link>{" "}
-              now and embark on an exciting journey with Promptare!
+              Sign up now and embark on an exciting journey with Promptare!
             </p>
           </div>
         </div>
@@ -91,7 +85,7 @@ const About = () => {
       <div className="hero pb-5 lg:pb-10 bg-base-100">
         <div className="hero-content flex-col lg:flex-row justify-center gap-10">
           <div className="max-w-lg text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
+            <h1 className="text-3xl font-extrabold mb-3">
               What We Offer
             </h1>
             <p className="pb-3">

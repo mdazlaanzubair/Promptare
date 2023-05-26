@@ -1,26 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { getProviders, useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import LoginProvider from "./LoginProvider";
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const [providers, setProviders] = useState(null);
-  console.log(session);
-  useEffect(() => {
-    const fetchProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
 
-    fetchProviders();
-  }, []);
+  const navLinks = [
+    {
+      url: "/",
+      title: "Home",
+    },
+    {
+      url: "/about",
+      title: "About",
+    },
+    {
+      url: "/feeds",
+      title: "Feeds",
+    },
+  ];
 
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
-        <div className="dropdown">
+        <div className="dropdown flex lg:hidden">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -41,14 +46,21 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-            <li>
-              <Link href="/feeds">Feeds</Link>
-            </li>
+            {navLinks.map((nav, index) => (
+              <li key={index}>
+                <Link href={nav.url}>{nav.title}</Link>
+              </li>
+            ))}
           </ul>
         </div>
+
+        <ul className="lg:flex hidden menu menu-horizontal menu-compact">
+          {navLinks.map((nav, index) => (
+            <li key={index}>
+              <Link href={nav.url}>{nav.title}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="navbar-center">
         <Link href="/" className="btn btn-ghost normal-case text-xl font-black">
@@ -114,17 +126,7 @@ const Navbar = () => {
           </>
         ) : (
           <ul className="menu menu-horizontal gap-2">
-            {providers &&
-              Object.values(providers).map((provider, index) => (
-                <a
-                  className="btn btn-primary rounded-3xl capitalize"
-                  onClick={() => signIn(provider.id)}
-                  key={index}
-                >
-                  Join <span className="lowercase mx-1">with</span>{" "}
-                  {provider.name}
-                </a>
-              ))}
+            <LoginProvider />
           </ul>
         )}
       </div>
