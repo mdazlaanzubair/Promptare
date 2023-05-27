@@ -20,6 +20,10 @@ const Navbar = () => {
       url: "/feeds",
       title: "Feeds",
     },
+    {
+      url: "/create-prompt",
+      title: "Create Prompt",
+    },
   ];
 
   return (
