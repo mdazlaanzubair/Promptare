@@ -2,10 +2,17 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import LoginProvider from "./LoginProvider";
+
+import appLogoFull from "@public/app-logo-full.png";
+import appLogoShort from "@public/app-logo-short.png";
+import appLogoIcon from "@public/app-logo-icon.png";
+import Image from "next/image";
 
 const Navbar = () => {
   const { data: session } = useSession();
+  const { pushTo } = useRouter();
 
   const navLinks = [
     {
@@ -19,10 +26,6 @@ const Navbar = () => {
     {
       url: "/feeds",
       title: "Feeds",
-    },
-    {
-      url: "/create-prompt",
-      title: "Create Prompt",
     },
   ];
 
@@ -67,8 +70,18 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-center">
-        <Link href="/" className="btn btn-ghost normal-case text-xl font-black">
-          Promptare
+        <Link
+          href="/"
+          className="btn btn-ghost normal-case text-xl font-black hover:bg-transparent"
+        >
+          <Image
+            src={appLogoFull}
+            className="w-20 lg:w-36 p-0"
+            height="0"
+            width="0"
+            alt="app logo full"
+            title="Promptare"
+          />
         </Link>
       </div>
       <div className="navbar-end">
@@ -123,7 +136,14 @@ const Navbar = () => {
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a onClick={() => signOut()}>Logout</a>
+                  <a
+                    onClick={() => {
+                      signOut();
+                      pushTo("/feeds");
+                    }}
+                  >
+                    Logout
+                  </a>
                 </li>
               </ul>
             </div>

@@ -2,6 +2,8 @@ import "@styles/global.css";
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Provider from "@components/Provider";
+import Toastifier from "@components/Toastifier";
+import { toast } from "react-toastify";
 
 export const metadata = {
   title: "Promptare",
@@ -17,6 +19,7 @@ const RootLayout = ({ children }) => {
           <main className="app">{children}</main>
           <Footer />
         </Provider>
+        <Toastifier />
       </body>
     </html>
   );

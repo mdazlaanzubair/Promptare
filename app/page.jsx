@@ -1,6 +1,7 @@
 import Image from "next/image";
 import homeImage from "../public/home_img.png";
 import Link from "next/link";
+import GradientText from "@components/GradientText";
 
 const HomePage = () => {
   return (
@@ -17,8 +18,8 @@ const HomePage = () => {
             />
           </div>
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
-              Welcome to Promptare!
+            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3">
+              Welcome to <GradientText text="Promptare!" />
             </h1>
             <h1 className="text-2xl lg:text-3xl font-medium mb-5">
               An ultimate social media hub for Chat GPT users!
@@ -28,7 +29,10 @@ const HomePage = () => {
               experience. Join our vibrant community of like-minded individuals
               and take your skills to the next level.
             </p>
-            <Link href="/about" className="btn btn-primary capitalize">
+            <Link
+              href="/about"
+              className="btn px-10 border-none text-neutral-content capitalize bg-gradient-to-r from-primary via-primary to-primary hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
+            >
               Explore
             </Link>
           </div>

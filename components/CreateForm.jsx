@@ -1,147 +1,135 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { MultiSelect } from "react-multi-select-component";
-import { useRouter } from "next/navigation";
+import Select from "react-select";
+
+import { sample_prompts, prompt_segments, prompt_tags } from "@utils/constants";
+import {
+  create_new_prompt,
+  populate_default_prompts,
+  validate_prompt_form,
+} from "@utils/promptCRUD";
 
 const CreateForm = () => {
-  const router = useRouter();
-
-  const [title, setTitle] = useState("");
-  const [prompt, setPrompt] = useState("");
-  const [selectedTags, setSelectedTags] = useState([]);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
+  // getting logged in user session
   const { data: session } = useSession();
 
-  const tags = [
-    { label: "Arts & Entertainment", value: "Arts & Entertainment" },
-    { label: "Automotive", value: "Automotive" },
-    { label: "Books & Literature", value: "Books & Literature" },
-    { label: "Business & Finance", value: "Business & Finance" },
-    { label: "Computers & Technology", value: "Computers & Technology" },
-    { label: "Culture", value: "Culture" },
-    { label: "Education", value: "Education" },
-    { label: "Food & Drink", value: "Food & Drink" },
-    { label: "Health & Fitness", value: "Health & Fitness" },
-    { label: "Home & Garden", value: "Home & Garden" },
-    { label: "Law & Government", value: "Law & Government" },
-    { label: "News", value: "News" },
-    { label: "Pets & Animals", value: "Pets & Animals" },
-    { label: "Science", value: "Science" },
-    { label: "Shopping", value: "Shopping" },
-    { label: "Sports", value: "Sports" },
-    { label: "Travel", value: "Travel" },
-    { label: "World", value: "World" },
-  ];
+  // loading constants data
+  const categories = prompt_segments;
+  const tags = prompt_tags;
 
+  // initializing form states
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [prompt, setPrompt] = useState("");
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState({});
+
+  // create form handler
   const createPrompt = async (e) => {
     e.preventDefault();
 
     setIsSubmitting(true);
 
-    const new_prompt = {
-      title,
+    const error_msg = validate_prompt_form({
       prompt,
-      user_id: session.id,
-      tags: selectedTags,
-    };
+      category: selectedCategory,
+      tags: selectedTags.map((tag) => tag.value),
+    });
 
-    try {
-      const response = fetch("/api/prompts/new", {
-        method: "POST",
-        body: JSON.stringify({ prompt: new_prompt }),
+    if (error_msg === true) {
+      setIsSubmitting(false);
+    }
+
+    if (error_msg === false) {
+      await create_new_prompt({
+        prompt,
+        category: selectedCategory.value,
+        tags: selectedTags.map((tag) => tag.value),
+        userId: session?.user?.id,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        router.push("/feeds");
-      } else {
-        console.log("Something went wrong!");
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setTitle("");
+      // emptying form data
       setPrompt("");
+      setSelectedCategory({});
       setSelectedTags([]);
       setIsSubmitting(false);
     }
   };
 
   return (
-    <>
-      <input
-        type="checkbox"
-        id="create-prompt-modal"
-        className="modal-toggle"
-      />
-      <label htmlFor="create-prompt-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
-          <h3 className="text-3xl font-bold pb-3">Create Prompt</h3>
-          <p className="pb-3">
-            Prompts spark creativity. Let&apos;s help the community with your
-            creativity.
-          </p>
-          <form className="w-full text-start" onSubmit={createPrompt}>
-            <div className="form-control mb-3">
-              <label className="label">
-                <span className="label-text font-bold text-lg">Title</span>
-              </label>
-              <input
-                type="text"
-                className="input input-bordered focus:outline-none focus:input-primary"
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Give your prompt a title . . ."
-                value={title}
-              />
-            </div>
-            <div className="form-control mb-3">
-              <label className="label">
-                <span className="label-text font-bold text-lg">Tags</span>
-              </label>
-              <MultiSelect
-                closeOnChangedValue
-                options={tags}
-                value={selectedTags}
-                onChange={setSelectedTags}
-                labelledBy="Select"
-              />
-            </div>
-            <div className="form-control mb-3">
-              <label className="label">
-                <span className="label-text font-bold text-lg">Prompt</span>
-              </label>
-              <textarea
-                type="text"
-                className="textarea focus:textarea-primary textarea-bordered focus:outline-none"
-                placeholder="Type your prompt here . . ."
-                rows={3}
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-              />
-            </div>
-            <div className="form-control">
-              {isSubmitting ? (
-                <button
-                  type="button"
-                  className="btn btn-primary btn-disabled capitalize loading"
-                  disabled
-                >
-                  Creating
-                </button>
-              ) : (
-                <button type="submit" className="btn btn-primary capitalize">
-                  Create &amp; Share
-                </button>
-              )}
-            </div>
-          </form>
+    <form className="w-full text-start" onSubmit={createPrompt}>
+      <div className="form-control mb-3">
+        <label className="label">
+          <span className="label-text font-bold">Prompt</span>
         </label>
-      </label>
-    </>
+        <textarea
+          type="text"
+          className="textarea focus:textarea-primary textarea-bordered focus:outline-none"
+          placeholder="Type your prompt here . . ."
+          rows={3}
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
+      </div>
+      <div className="form-control mb-3">
+        <label className="label">
+          <span className="label-text font-bold">Categories</span>
+        </label>
+        <Select
+          options={categories}
+          placeholder="Choose segment..."
+          onChange={setSelectedCategory}
+        />
+      </div>
+      <div className="form-control mb-3">
+        <label className="label">
+          <span className="label-text font-bold">Notable Tags</span>
+        </label>
+        <MultiSelect
+          // closeOnChangedValue
+          isCreatable
+          options={tags}
+          value={selectedTags}
+          onChange={setSelectedTags}
+          placeholder="Choose segment..."
+        />
+      </div>
+      <div className="form-control">
+        {isSubmitting ? (
+          <button
+            type="button"
+            className="btn btn-primary btn-disabled capitalize loading"
+            disabled
+          >
+            Creating
+          </button>
+        ) : (
+          <>
+            <button
+              type="submit"
+              className="btn mb-2 border-none text-neutral-content capitalize bg-gradient-to-r from-primary via-primary to-primary hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
+            >
+              Create Prompt
+            </button>
+            {session?.user?.id == "64734dd3ad20c60ed2f1b968" ? (
+              <button
+                type="button"
+                className="btn mb-2 btn-neutral capitalize"
+                onClick={async () =>
+                  await populate_default_prompts("64734dd3ad20c60ed2f1b968")
+                }
+              >
+                Default Upload
+              </button>
+            ) : (
+              ""
+            )}
+          </>
+        )}
+      </div>
+    </form>
   );
 };
 

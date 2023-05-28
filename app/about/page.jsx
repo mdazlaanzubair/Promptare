@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import aboutImage from "../../public/about_img.png";
 import missionImage from "../../public/mission_img.png";
+import GradientText from "@components/GradientText";
 const About = () => {
   const services = [
     {
@@ -36,8 +37,8 @@ const About = () => {
             />
           </div>
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3 text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">
-              What is Promptare!
+            <h1 className="text-4xl lg:text-5xl font-extrabold mb-3">
+              What is <GradientText text="Promptare!" />
             </h1>
             <h2 className="text-2xl lg:text-3xl font-medium mb-5">
               An ultimate social media hub for Chat GPT users!
@@ -48,7 +49,12 @@ const About = () => {
               Chat GPT experience. Join a vibrant community of like-minded
               individuals and take your Chat GPT usage to the next level!
             </p>
-            <Link href="/feeds" className="btn btn-primary btn-outline">Go to Feeds</Link>
+            <Link
+              href="/feeds"
+              className="btn px-10 border-none text-neutral-content capitalize bg-gradient-to-r from-primary via-primary to-primary hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
+            >
+              Go to Feeds
+            </Link>
           </div>
         </div>
       </div>
@@ -65,9 +71,7 @@ const About = () => {
             />
           </div>
           <div className="max-w-lg lg:max-w-2xl text-center lg:text-left">
-            <h1 className="text-3xl font-extrabold mb-3">
-              Our Mission
-            </h1>
+            <h1 className="text-3xl font-extrabold mb-3">Our Mission</h1>
             <p className="pb-3">
               At Promptare, we are dedicated to providing a platform where Chat
               GPT users can connect, learn, and share their experiences. Our
@@ -85,9 +89,7 @@ const About = () => {
       <div className="hero pb-5 lg:pb-10 bg-base-100">
         <div className="hero-content flex-col lg:flex-row justify-center gap-10">
           <div className="max-w-lg text-center lg:text-left">
-            <h1 className="text-3xl font-extrabold mb-3">
-              What We Offer
-            </h1>
+            <h1 className="text-3xl font-extrabold mb-3">What We Offer</h1>
             <p className="pb-3">
               Are you ready to take your Chat GPT usage to the next level? Join
               Promptare now and become a part of our growing community. Connect

@@ -41,6 +41,7 @@ const authHandler = NextAuth({
               full_name: profile.name,
             });
           }
+
           return true;
         } else {
           console.log("Something went wrong with the databases.");
