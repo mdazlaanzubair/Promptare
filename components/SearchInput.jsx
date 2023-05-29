@@ -25,7 +25,7 @@ const SearchInput = ({ searchText, setSearchText }) => {
           placeholder="Search prompts here..."
           className="border-none outline-none w-full bg-transparent"
           onChange={(e) => setSearchText(e.target.value)}
-          value={searchText}
+          value={searchText === "All" ? "" : searchText}
         />
       </div>
     </form>
