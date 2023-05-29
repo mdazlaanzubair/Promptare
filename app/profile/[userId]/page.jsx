@@ -1,28 +1,30 @@
 import FeedCardSkeleton from "@components/FeedCardSkeleton";
-import GradientText from "@components/GradientText";
+import Feeds from "@components/Feeds";
 import ProfileCard from "@components/ProfileCard";
-import Image from "next/image";
-import Link from "next/link";
+import { getUserProfileData } from "@utils/dbFunctions";
 
 const ProfilePage = async ({ params }) => {
-  const response = await fetch(
-    "http://localhost:3000/api/profile/" + params.userId
-  );
-  const userData = await response.json();
+  const userData = await getUserProfileData(params.userId);
 
   return (
     <section id="profile-page">
       <div className="min-h-screen bg-base-100 px-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
           <div className="col">
-            <ProfileCard />
+            <ProfileCard
+              user={userData.user}
+              promptCount={userData.prompts.length}
+            />
           </div>
-          <div className="col-span-2">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              {[1, 2, 3,4].map((count, index) => (
-                    <FeedCardSkeleton key={index} />
-                  ))
-                }
+          <div className="col-span-3">
+            <div className="grid grid-cols-1">
+              {userData && userData.prompts.length > 0 ? (
+                <Feeds promptData={userData.prompts} />
+              ) : (
+                [1, 2, 3].map((count, index) => (
+                  <FeedCardSkeleton key={index} />
+                ))
+              )}
             </div>
           </div>
         </div>

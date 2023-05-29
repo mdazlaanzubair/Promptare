@@ -20,14 +20,12 @@ export const GET = async (request, { params }) => {
     }
 
     // else - fetch data in reverse order (latest first)
-    const userData = await User.findById(params.userId);
-    const userPrompts = await Prompt.find({ creator: params.userId }).populate(
+    const user = await User.findById(params.userId);
+    const prompts = await Prompt.find({ creator: params.userId }).populate(
       "creator"
     );
-    return new Response(
-      JSON.stringify({ userDetails: userData, userPrompts }),
-      { status: 200 }
-    );
+
+    return new Response(JSON.stringify({ user, prompts }), { status: 200 });
   } catch (error) {
     console.log(error);
     return new Response(JSON.stringify({ msg: "Failed to fetch user data." }), {

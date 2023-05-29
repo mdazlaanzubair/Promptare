@@ -1,3 +1,4 @@
+import axios from "axios";
 import { toast } from "react-toastify";
 
 // CREATE NEW PROMPT
@@ -38,13 +39,27 @@ export const getAllPrompts = async () => {
 };
 
 // GET USER DATA FROM DATABASE
+// export const getUserProfileData = async (userId) => {
+//   try {
+//     const response = await fetch(
+//       `${process.env.API_BASE_URL}/api/profile/${userId}`
+//     );
+
+//     const userData = await response.json();
+//     return userData;
+//   } catch (error) {
+//     console.log(error);
+//     console.log("Something went wrong!");
+//   }
+// };
+
 export const getUserProfileData = async (userId) => {
   try {
-    const response = await fetch(
+    const response = await axios.get(
       `${process.env.API_BASE_URL}/api/profile/${userId}`
     );
 
-    const userData = await response.json();
+    const userData = response.data;
     return userData;
   } catch (error) {
     console.log(error);
