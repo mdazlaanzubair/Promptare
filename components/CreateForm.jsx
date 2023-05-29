@@ -6,7 +6,8 @@ import { MultiSelect } from "react-multi-select-component";
 import Select from "react-select";
 
 import { prompt_segments, prompt_tags } from "@utils/constants";
-import { create_new_prompt, validate_prompt_form } from "@utils/promptCRUD";
+import { create_new_prompt } from "@utils/promptCRUD";
+import { validate_prompt_form } from "@utils/validators";
 
 const CreateForm = () => {
   // getting logged in user session

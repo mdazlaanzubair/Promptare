@@ -1,7 +1,10 @@
 import Feeds from "@components/Feeds";
 import GradientText from "@components/GradientText";
+import { getAllPrompts } from "@utils/promptCRUD";
 
-const FeedsPage = () => {
+const FeedsPage = async () => {
+  const promptData = await getAllPrompts();
+
   return (
     <section id="feeds-page">
       <div className="hero min-h-screen bg-base-100">
@@ -34,7 +37,7 @@ const FeedsPage = () => {
           </div>
         </div>
       </div>
-      <Feeds />
+      {promptData && <Feeds promptData={promptData} />}
     </section>
   );
 };

@@ -12,10 +12,7 @@ const FeedCard = ({ feed, setSearchText }) => {
 
   return (
     <div className="card shadow-lg">
-      <div
-        className="badge badge-primary cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-primary-focus hover:via-primary hover:to-primary-focus"
-        onClick={() => setSearchText(feed.category)}
-      >
+      <div className="badge badge-primary cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-primary-focus hover:via-primary hover:to-primary-focus">
         {feed.category}
       </div>
       <div className="card-body bg-base-100 text-base-content rounded-box">

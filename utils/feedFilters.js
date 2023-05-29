@@ -17,22 +17,27 @@ export const searchByText = (prompts, keyword) => {
     const matchesPrompt = feed.prompt.toLowerCase().includes(lowerCaseKeyword);
 
     // 4. tags
-    const matchesCategory = feed.category
-      .toLowerCase()
-      .includes(lowerCaseKeyword);
-
-    // 5. tags
     const matchesTags = feed.tags.some((tag) =>
       tag.toLowerCase().includes(lowerCaseKeyword)
     );
 
-    return (
-      matchesPrompt ||
-      matchesTags ||
-      matchesUsername ||
-      matchesFullname ||
-      matchesCategory
-    );
+    return matchesPrompt || matchesTags || matchesUsername || matchesFullname;
+  });
+
+  return filteredPrompts;
+};
+
+export const searchByCategory = (prompts, category) => {
+  if (category === "All") {
+    return prompts;
+  }
+
+  const filteredPrompts = prompts.filter((feed) => {
+    const lowerCaseCategory = category.toLowerCase();
+    const matchesCategory = feed.category
+      .toLowerCase()
+      .includes(lowerCaseCategory);
+    return matchesCategory;
   });
 
   return filteredPrompts;

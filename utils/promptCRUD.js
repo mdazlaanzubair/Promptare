@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 
-// creating new prompt and saving to database
+// CREATE NEW PROMPT
 export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   try {
-    const response = await fetch("/api/prompt/new", {
+    const response = await fetch(process.env.API_BASE_URL + "/api/prompt/new", {
       method: "POST",
       body: JSON.stringify({
         prompt: {
@@ -25,43 +25,29 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   }
 };
 
-// prompt form validator
-export const validate_prompt_form = ({ prompt, category, tags }) => {
-  // validating prompt
-  if (prompt.trim() === "") {
-    toast.error("Please provide a prompt.");
-    return true;
+export const getAllPrompts = async () => {
+  try {
+    const response = await fetch(process.env.API_BASE_URL + "/api/prompt");
+    const promptData = await response.json();
+    return promptData;
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong!");
   }
-
-  // validating category
-  if (!category || Object.keys(category).length === 0) {
-    toast.error("Please select a category.");
-    return true;
-  }
-
-  // validating tags
-  if (tags.length === 0) {
-    toast.error("Please select at least one tag.");
-    return true;
-  }
-
-  if (tags.length > 3) {
-    toast.error("You cannot select more than 3 tags.");
-    return true;
-  }
-
-  return false;
 };
 
-// populate database with random prompts
+// STORE PROMPT IN DATABASE BY DEFAULT
 export const populate_default_prompts = async () => {
   try {
-    const response = await fetch("/api/prompt/default-prompts", {
-      method: "POST",
-      body: JSON.stringify({
-        isDefault: true,
-      }),
-    });
+    const response = await fetch(
+      process.env.API_BASE_URL + "/api/prompt/default-prompts",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          isDefault: true,
+        }),
+      }
+    );
 
     if (response.status === 201) {
       const data = await response.json();
