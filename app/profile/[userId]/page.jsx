@@ -20,7 +20,7 @@ const ProfilePage = async ({ params }) => {
             <div className="flex flex-col items-center align-middle mt-20">
               {userData && userData.prompts.length === 0 ? (
                 <p className="text-center">
-                  <strong>This user haven't contributed yet.</strong>
+                  <strong>This user haven&apos;t contributed yet.</strong>
                   <br />
                   <Link
                     href="/create-prompt"

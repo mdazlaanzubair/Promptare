@@ -42,7 +42,7 @@ const FeedsPage = async () => {
       <div className="flex flex-col items-center align-middle mt-20">
         {promptData && promptData.length === 0 ? (
           <p className="text-center">
-            <strong>This user haven't contributed yet.</strong>
+            <strong>This user haven&apos;t contributed yet.</strong>
             <br />
             <Link
               href="/create-prompt"
