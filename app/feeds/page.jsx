@@ -1,6 +1,7 @@
 import Feeds from "@components/Feeds";
 import GradientText from "@components/GradientText";
 import { getAllPrompts } from "@utils/dbFunctions";
+import Link from "next/link";
 
 const FeedsPage = async () => {
   const promptData = await getAllPrompts();
