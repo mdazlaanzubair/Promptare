@@ -51,7 +51,7 @@ const About = () => {
             </p>
             <Link
               href="/feeds"
-              className="btn px-10 border-none text-neutral-content capitalize bg-gradient-to-r from-primary via-primary to-primary hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
+              className="btn btn-primary px-10 border-none text-neutral-content capitalize hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
             >
               Go to Feeds
             </Link>

@@ -5,12 +5,8 @@ import { useSession } from "next-auth/react";
 import { MultiSelect } from "react-multi-select-component";
 import Select from "react-select";
 
-import { sample_prompts, prompt_segments, prompt_tags } from "@utils/constants";
-import {
-  create_new_prompt,
-  populate_default_prompts,
-  validate_prompt_form,
-} from "@utils/promptCRUD";
+import { prompt_segments, prompt_tags } from "@utils/constants";
+import { create_new_prompt, validate_prompt_form } from "@utils/promptCRUD";
 
 const CreateForm = () => {
   // getting logged in user session
@@ -113,17 +109,6 @@ const CreateForm = () => {
             >
               Create Prompt
             </button>
-            {session?.user?.id == "64734dd3ad20c60ed2f1b968" ? (
-              <button
-                type="button"
-                className="btn mb-2 btn-neutral capitalize"
-                onClick={async () => await populate_default_prompts()}
-              >
-                Default Upload
-              </button>
-            ) : (
-              ""
-            )}
           </>
         )}
       </div>

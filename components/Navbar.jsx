@@ -9,6 +9,7 @@ import appLogoFull from "@public/app-logo-full.png";
 import appLogoShort from "@public/app-logo-short.png";
 import appLogoIcon from "@public/app-logo-icon.png";
 import Image from "next/image";
+import { populate_default_prompts } from "@utils/promptCRUD";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -123,18 +124,24 @@ const Navbar = () => {
                   </a>
                 </p>
                 <li>
-                  <Link href="/profile" className="justify-between">
+                  <Link href="/profile">
                     My Profile
                   </Link>
                 </li>
                 <li>
-                  <Link href="/create-prompt" className="justify-between">
+                  <Link href="/create-prompt">
                     Create Prompt
                   </Link>
                 </li>
-                <li>
-                  <a>Settings</a>
-                </li>
+                {session?.user?.id == "64734dd3ad20c60ed2f1b968" ? (
+                  <li>
+                    <a onClick={async () => await populate_default_prompts()}>
+                      Spin-up Bulk Prompts
+                    </a>
+                  </li>
+                ) : (
+                  ""
+                )}
                 <li>
                   <a
                     onClick={() => {

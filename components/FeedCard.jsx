@@ -11,6 +11,12 @@ const FeedCard = ({ feed, setSearchText }) => {
 
   return (
     <div className="card shadow-lg">
+      <div
+        className="badge badge-primary cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-primary-focus hover:via-primary hover:to-primary-focus"
+        onClick={() => setSearchText(feed.category)}
+      >
+        {feed.category}
+      </div>
       <div className="card-body bg-base-100 text-base-content rounded-box">
         <div className="flex flex-row border-b pb-3">
           <div className="flex flex-grow flex-row items-center justify-start gap-3">
@@ -27,7 +33,7 @@ const FeedCard = ({ feed, setSearchText }) => {
                 />
               </div>
             </div>
-            <div className="name">
+            <div className="flex flex-col">
               <h1 className="text-sm font-bold -mb-2">
                 {feed?.creator?.full_name}
               </h1>
@@ -105,7 +111,7 @@ const FeedCard = ({ feed, setSearchText }) => {
           {feed?.tags?.map((tag, index) => (
             <div
               key={index}
-              className="badge badge-primary cursor-pointer badge-sm text-xs capitalize"
+              className="badge cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-neutral-focus hover:via-gray-800 hover:to-neutral-focus"
               onClick={() => setSearchText(tag)}
             >
               {tag}

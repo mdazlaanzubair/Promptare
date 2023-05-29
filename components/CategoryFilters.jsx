@@ -4,12 +4,20 @@ import { prompt_segments } from "@utils/constants";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
-const CategoryFilters = ({ setSelectedFilter }) => {
+const CategoryFilters = ({ searchText, setSearchText }) => {
   const [categoryFilter, setCategoryFilter] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState({
+    label: "All",
+    value: "All",
+  });
 
   useEffect(() => {
     setCategoryFilter(prompt_segments);
   }, []);
+
+  useEffect(() => {
+    setSearchText(selectedFilter.value);
+  }, [selectedFilter]);
 
   return (
     <div className="flex flex-row items-center">
@@ -24,7 +32,12 @@ const CategoryFilters = ({ setSelectedFilter }) => {
         <button
           type="button"
           className="btn btn-link btn-sm capitalize"
-          onClick={() => setSelectedFilter("All")}
+          onClick={() =>
+            setSelectedFilter({
+              label: "All",
+              value: "All",
+            })
+          }
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
