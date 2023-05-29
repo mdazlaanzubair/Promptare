@@ -25,11 +25,27 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   }
 };
 
+// GET ALL PROMPTS FROM DATABASE
 export const getAllPrompts = async () => {
   try {
     const response = await fetch(process.env.API_BASE_URL + "/api/prompt");
     const promptData = await response.json();
     return promptData;
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong!");
+  }
+};
+
+// GET USER DATA FROM DATABASE
+export const getUserProfileData = async (userId) => {
+  try {
+    const response = await fetch(
+      process.env.API_BASE_URL + "/api/profile/" + userId
+    );
+
+    const userData = await response.json();
+    return userData;
   } catch (error) {
     console.log(error);
     console.log("Something went wrong!");

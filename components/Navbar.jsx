@@ -9,7 +9,7 @@ import appLogoFull from "@public/app-logo-full.png";
 import appLogoShort from "@public/app-logo-short.png";
 import appLogoIcon from "@public/app-logo-icon.png";
 import Image from "next/image";
-import { populate_default_prompts } from "@utils/promptCRUD";
+import { populate_default_prompts } from "@utils/dbFunctions";
 
 const Navbar = () => {
   const { data: session } = useSession();
