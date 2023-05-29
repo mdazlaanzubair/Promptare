@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 // CREATE NEW PROMPT
 export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   try {
-    const response = await fetch(process.env.API_BASE_URL + "/api/prompt/new", {
+    const response = await fetch(`${process.env.API_BASE_URL}/api/prompt/new`, {
       method: "POST",
       body: JSON.stringify({
         prompt: {
@@ -28,7 +28,7 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
 // GET ALL PROMPTS FROM DATABASE
 export const getAllPrompts = async () => {
   try {
-    const response = await fetch(process.env.API_BASE_URL + "/api/prompt");
+    const response = await fetch(`${process.env.API_BASE_URL}/api/prompt/`);
     const promptData = await response.json();
     return promptData;
   } catch (error) {
@@ -41,7 +41,7 @@ export const getAllPrompts = async () => {
 export const getUserProfileData = async (userId) => {
   try {
     const response = await fetch(
-      process.env.API_BASE_URL + "/api/profile/" + userId
+      `${process.env.API_BASE_URL}/api/profile/${userId}`
     );
 
     const userData = await response.json();
@@ -56,7 +56,7 @@ export const getUserProfileData = async (userId) => {
 export const populate_default_prompts = async () => {
   try {
     const response = await fetch(
-      process.env.API_BASE_URL + "/api/prompt/default-prompts",
+      `${process.env.API_BASE_URL}/api/prompt/default-prompts`,
       {
         method: "POST",
         body: JSON.stringify({

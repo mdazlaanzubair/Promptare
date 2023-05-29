@@ -1,6 +1,6 @@
 import Feeds from "@components/Feeds";
 import GradientText from "@components/GradientText";
-import { getAllPrompts } from "@utils/promptCRUD";
+import { getAllPrompts } from "@utils/dbFunctions";
 
 const FeedsPage = async () => {
   const promptData = await getAllPrompts();
