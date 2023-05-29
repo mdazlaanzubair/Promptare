@@ -68,7 +68,7 @@ const Feeds = () => {
                   <FeedCardSkeleton key={index} />
                 ))
               : ""}
-            {filteredFeeds.length === 0 ? (
+            {filteredFeeds.length === 0 && isLoadingPrompts === false ? (
               <div className="col-span-3 py-3">
                 <p className="text-center">
                   Nothing to display,{" "}

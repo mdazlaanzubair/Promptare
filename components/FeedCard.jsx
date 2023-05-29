@@ -4,6 +4,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 const FeedCard = ({ feed, setSearchText }) => {
   // getting logged in user session
@@ -34,12 +35,15 @@ const FeedCard = ({ feed, setSearchText }) => {
               </div>
             </div>
             <div className="flex flex-col">
-              <h1 className="text-sm font-bold -mb-2">
+              <h1 className="text-sm font-bold -mb-1">
                 {feed?.creator?.full_name}
               </h1>
-              <a href="#" className="lowercase text-xs text-primary">
+              <Link
+                href={`/profile/${feed?.creator?._id}`}
+                className="lowercase text-xs text-primary font-medium hover:underline underline-offset-2"
+              >
                 @{feed?.creator?.username}
-              </a>
+              </Link>
             </div>
           </div>
           <div className="flex flex-shrink-0 justify-between gap-1">
