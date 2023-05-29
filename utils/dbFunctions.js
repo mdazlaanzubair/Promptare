@@ -1,7 +1,18 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// CREATE NEW PROMPT
+// PROMPT FUNCTION - INDEX
+export const getAllPrompts = async () => {
+  try {
+    const response = await axios.get(`${process.env.API_BASE_URL}/api/prompt/`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong!");
+  }
+};
+
+// PROMPT FUNCTION - CREATE
 export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   try {
     const response = await axios.post(
@@ -25,10 +36,12 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   }
 };
 
-// GET ALL PROMPTS FROM DATABASE
-export const getAllPrompts = async () => {
+// PROMPT FUNCTION - SINGLE
+export const getPromptById = async (promptId) => {
   try {
-    const response = await axios.get(`${process.env.API_BASE_URL}/api/prompt/`);
+    const response = await axios.get(
+      `${process.env.API_BASE_URL}/api/prompt/${promptId}`
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -36,7 +49,48 @@ export const getAllPrompts = async () => {
   }
 };
 
-// STORE PROMPT IN DATABASE BY DEFAULT
+// PROMPT FUNCTION - UPDATE
+export const updatePromptToDb = async (promptId, updatedPrompt) => {
+  try {
+    const response = await axios.put(
+      `${process.env.API_BASE_URL}/api/prompt/update`,
+      {
+        promptId,
+        updatedPrompt,
+      }
+    );
+
+    if (response.status === 200) {
+      const data = response.data;
+      console.log(data.msg);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong!");
+  }
+};
+
+// PROMPT FUNCTION - DELETE
+export const deletePrompt = async (promptId) => {
+  try {
+    const response = await axios.delete(
+      `${process.env.API_BASE_URL}/api/prompt/delete`,
+      {
+        data: { promptId },
+      }
+    );
+
+    if (response.status === 200) {
+      const data = response.data;
+      console.log(data.msg);
+    }
+  } catch (error) {
+    console.log(error);
+    console.log("Something went wrong!");
+  }
+};
+
+// PROMPT FUNCTION - LOAD PROMPTS BY DEFAULT
 export const populate_default_prompts = async () => {
   try {
     const response = await axios.post(
@@ -55,7 +109,7 @@ export const populate_default_prompts = async () => {
   }
 };
 
-// GET USER DATA FROM DATABASE
+// USER FUNCTION - GET USER DATA
 export const getUserProfileData = async (userId) => {
   try {
     const response = await axios.get(
@@ -68,6 +122,7 @@ export const getUserProfileData = async (userId) => {
   }
 };
 
+// USER FUNCTION - INDEX
 export const getAllUsers = async () => {
   try {
     const response = await axios.get(

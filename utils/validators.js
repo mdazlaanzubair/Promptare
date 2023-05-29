@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 // 1. CREATE-PROMPT FORM VALIDATOR
 export const validate_prompt_form = ({ prompt, category, tags }) => {
   // validating prompt

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { MultiSelect } from "react-multi-select-component";
 import Select from "react-select";
@@ -85,7 +85,6 @@ const CreateForm = () => {
           <span className="label-text font-bold">Notable Tags</span>
         </label>
         <MultiSelect
-          // closeOnChangedValue
           isCreatable
           options={tags}
           value={selectedTags}

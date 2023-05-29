@@ -68,7 +68,6 @@ const Feeds = ({ promptData }) => {
           filteredFeeds.map((feed, index) => (
             <FeedCard
               key={index}
-              setSearchText={setSearchText}
               setSelectedCategory={setSelectedCategory}
               feed={feed}
             />
