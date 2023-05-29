@@ -1,6 +1,7 @@
 import Feeds from "@components/Feeds";
 import ProfileCard from "@components/ProfileCard";
 import { getUserProfileData } from "@utils/dbFunctions";
+import Link from "next/link";
 
 const ProfilePage = async ({ params }) => {
   const userData = await getUserProfileData(params.userId);
@@ -16,8 +17,21 @@ const ProfilePage = async ({ params }) => {
             />
           </div>
           <div className="col-span-3">
-            <div className="grid grid-cols-1">
-              {userData && <Feeds promptData={userData.prompts} />}
+            <div className="flex flex-col items-center align-middle mt-20">
+              {userData && userData.prompts.length === 0 ? (
+                <p className="text-center">
+                  <strong>This user haven't contributed yet.</strong>
+                  <br />
+                  <Link
+                    href="/create-prompt"
+                    className="link link-primary link-hover underline-offset-2"
+                  >
+                    Do you want to?
+                  </Link>
+                </p>
+              ) : (
+                <Feeds promptData={userData.prompts} />
+              )}
             </div>
           </div>
         </div>

@@ -37,7 +37,23 @@ const FeedsPage = async () => {
           </div>
         </div>
       </div>
-      {promptData && <Feeds promptData={promptData} />}
+
+      <div className="flex flex-col items-center align-middle mt-20">
+        {promptData && promptData.length === 0 ? (
+          <p className="text-center">
+            <strong>This user haven't contributed yet.</strong>
+            <br />
+            <Link
+              href="/create-prompt"
+              className="link link-primary link-hover underline-offset-2"
+            >
+              Do you want to?
+            </Link>
+          </p>
+        ) : (
+          <Feeds promptData={promptData} />
+        )}
+      </div>
     </section>
   );
 };
