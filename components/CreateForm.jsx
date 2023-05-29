@@ -117,9 +117,7 @@ const CreateForm = () => {
               <button
                 type="button"
                 className="btn mb-2 btn-neutral capitalize"
-                onClick={async () =>
-                  await populate_default_prompts("64734dd3ad20c60ed2f1b968")
-                }
+                onClick={async () => await populate_default_prompts()}
               >
                 Default Upload
               </button>

@@ -2,7 +2,7 @@
 
 const SearchInput = ({ searchText, setSearchText }) => {
   return (
-    <form className="group input-search w-full mx-auto flex flex-row flex-wrap rounded-box p-3 justify-between items-center gap-3 shadow-lg bg-base-100">
+    <form className="group input-search w-full mx-auto flex flex-row flex-wrap rounded-box px-3 py-2 justify-between items-center gap-3 shadow-sm bg-base-100">
       <div className="flex-shrink-0">
         <svg
           xmlns="http://www.w3.org/2000/svg"

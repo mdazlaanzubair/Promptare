@@ -1,69 +1,47 @@
 "use client";
 
 import { prompt_segments } from "@utils/constants";
+import { useEffect, useState } from "react";
+import Select from "react-select";
 
-const CategoryFilters = ({ selectedFilter, setSelectedFilter }) => {
-  const categories = prompt_segments;
+const CategoryFilters = ({ setSelectedFilter }) => {
+  const [categoryFilter, setCategoryFilter] = useState([]);
+
+  useEffect(() => {
+    setCategoryFilter(prompt_segments);
+  }, []);
 
   return (
-    <>
-      <div className="dropdown flex lg:hidden">
-        <label tabIndex={0} className="btn btn-primary m-1">
-          Prompt Segments
-        </label>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
-        >
-          <li onClick={() => setSelectedFilter("All")}>
-            <a
-              className={`text-sm hover-bordered ${
-                selectedFilter === "All" ? "active" : ""
-              }`}
-            >
-              All
-            </a>
-          </li>
-          {categories.map((category, index) => (
-            <li key={index} onClick={() => setSelectedFilter(category.value)}>
-              <a
-                className={`text-xs hover-bordered ${
-                  selectedFilter === category.value ? "active" : ""
-                }`}
-              >
-                {category.value}
-              </a>
-            </li>
-          ))}
-        </ul>
+    <div className="flex flex-row items-center">
+      <div className="flex-grow">
+        <Select
+          placeholder="Filter by segments"
+          options={categoryFilter}
+          onChange={setSelectedFilter}
+        />
       </div>
-
-      <ul className="menu bg-base-100 rounded-box pt-0 shadow-lg hidden lg:flex">
-        <p className="font-bold text-lg py-3 mt-0 text-center">
-          <span>Prompt Segments</span>
-        </p>
-        <li onClick={() => setSelectedFilter("All")}>
-          <a
-            className={`text-sm hover-bordered ${
-              selectedFilter === "All" ? "active" : ""
-            }`}
+      <div className="flex-shrink">
+        <button
+          type="button"
+          className="btn btn-link btn-sm capitalize"
+          onClick={() => setSelectedFilter("All")}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-4 h-4 mr-1"
           >
-            All
-          </a>
-        </li>
-        {categories.map((category, index) => (
-          <li key={index} onClick={() => setSelectedFilter(category.value)}>
-            <a
-              className={`text-xs hover-bordered ${
-                selectedFilter === category.value ? "active" : ""
-              }`}
-            >
-              {category.value}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </>
+            <path
+              fillRule="evenodd"
+              d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Reset
+        </button>
+      </div>
+    </div>
   );
 };
 

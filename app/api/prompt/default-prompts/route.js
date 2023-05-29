@@ -1,8 +1,10 @@
 import Prompt from "@models/prompt";
+import { sample_prompts } from "@utils/constants";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (req) => {
-  const { prompts, userId } = await req.json();
+  const { isDefault } = await req.json();
+  const prompts = sample_prompts;
 
   // connecting to the database using try/catch block
   try {
@@ -11,21 +13,25 @@ export const POST = async (req) => {
 
     // if connection successful
     if (dbConnectionStatus) {
-      prompts.map(async (prompt) => {
-        const newPrompt = await Prompt({
-          creator: userId,
-          category: prompt.category,
-          prompt: prompt.prompt,
-          tags: prompt.tags,
+      if (isDefault === true) {
+        prompts.map(async (prompt) => {
+          const newPrompt = await Prompt({
+            creator: prompt.userId,
+            category: prompt.category,
+            prompt: prompt.prompt,
+            tags: prompt.tags,
+          });
+
+          await newPrompt.save();
         });
 
-        await newPrompt.save();
-      });
-
-      return new Response(
-        JSON.stringify({ msg: "Default prompts are populated successfully!" }),
-        { status: 201 }
-      );
+        return new Response(
+          JSON.stringify({
+            msg: "Default prompts are populated successfully!",
+          }),
+          { status: 201 }
+        );
+      }
     } else {
       console.log("Something went wrong with the databases.");
     }

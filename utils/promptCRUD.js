@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import { sample_prompts } from "./constants";
 
 // creating new prompt and saving to database
 export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
@@ -46,19 +45,21 @@ export const validate_prompt_form = ({ prompt, category, tags }) => {
     return true;
   }
 
+  if (tags.length > 3) {
+    toast.error("You cannot select more than 3 tags.");
+    return true;
+  }
+
   return false;
 };
 
 // populate database with random prompts
-export const populate_default_prompts = async (userId) => {
-  const prompts = sample_prompts;
-
+export const populate_default_prompts = async () => {
   try {
     const response = await fetch("/api/prompt/default-prompts", {
       method: "POST",
       body: JSON.stringify({
-        prompts,
-        userId,
+        isDefault: true,
       }),
     });
 
