@@ -28,6 +28,10 @@ const Navbar = () => {
       url: "/feeds",
       title: "Feeds",
     },
+    {
+      url: "/profile",
+      title: "Contributors",
+    },
   ];
 
   return (
@@ -124,14 +128,10 @@ const Navbar = () => {
                   </a>
                 </p>
                 <li>
-                  <Link href="/profile">
-                    My Profile
-                  </Link>
+                  <Link href="/profile">My Profile</Link>
                 </li>
                 <li>
-                  <Link href="/create-prompt">
-                    Create Prompt
-                  </Link>
+                  <Link href="/create-prompt">Create Prompt</Link>
                 </li>
                 {session?.user?.id == "64734dd3ad20c60ed2f1b968" ? (
                   <li>

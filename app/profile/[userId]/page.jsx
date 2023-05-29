@@ -1,4 +1,3 @@
-import FeedCardSkeleton from "@components/FeedCardSkeleton";
 import Feeds from "@components/Feeds";
 import ProfileCard from "@components/ProfileCard";
 import { getUserProfileData } from "@utils/dbFunctions";
@@ -18,13 +17,7 @@ const ProfilePage = async ({ params }) => {
           </div>
           <div className="col-span-3">
             <div className="grid grid-cols-1">
-              {userData && userData.prompts.length > 0 ? (
-                <Feeds promptData={userData.prompts} />
-              ) : (
-                [1, 2, 3].map((count, index) => (
-                  <FeedCardSkeleton key={index} />
-                ))
-              )}
+              {userData && <Feeds promptData={userData.prompts} />}
             </div>
           </div>
         </div>

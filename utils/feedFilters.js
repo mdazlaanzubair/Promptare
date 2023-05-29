@@ -42,3 +42,27 @@ export const searchByCategory = (prompts, category) => {
 
   return filteredPrompts;
 };
+
+export const searchByUsername = (users, keyword) => {
+  const filteredUsers = users.filter((user) => {
+    const lowerCaseKeyword = keyword.toLowerCase();
+
+    // Check if the following contains the keyword
+    // 1. full_name
+    const matchesFullname = user.full_name
+      .toLowerCase()
+      .includes(lowerCaseKeyword);
+
+    // 2. username
+    const matchesUsername = user.username
+      .toLowerCase()
+      .includes(lowerCaseKeyword);
+
+    // 3. email
+    const matchesEmail = user.email.toLowerCase().includes(lowerCaseKeyword);
+
+    return matchesEmail || matchesUsername || matchesFullname;
+  });
+
+  return filteredUsers;
+};

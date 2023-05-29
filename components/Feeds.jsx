@@ -4,7 +4,6 @@ import SearchInput from "@components/SearchInput";
 import { searchByCategory, searchByText } from "@utils/feedFilters";
 import { useEffect, useState } from "react";
 import FeedCard from "./FeedCard";
-import Link from "next/link";
 
 const Feeds = ({ promptData }) => {
   const [searchText, setSearchText] = useState("");
@@ -12,7 +11,7 @@ const Feeds = ({ promptData }) => {
     label: "All",
     value: "All",
   });
-  const [filteredFeeds, setFilteredFeeds] = useState([]);
+  const [filteredFeeds, setFilteredFeeds] = useState([...promptData]);
 
   // 1. perform search by keywords over prompts
   useEffect(() => {
@@ -27,10 +26,7 @@ const Feeds = ({ promptData }) => {
   }, [selectedCategory]);
 
   return (
-    <div
-      id="feeds-section"
-      className="bg-base-200 mx-auto p-5"
-    >
+    <div id="feeds-section" className="bg-base-200 mx-auto p-5">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5 mb-3 items-center justify-end">
         <div className="col-span-1">
           <CategoryFilters setSelectedCategory={setSelectedCategory} />
@@ -68,19 +64,7 @@ const Feeds = ({ promptData }) => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        {filteredFeeds.length === 0 ? (
-          <div className="col-span-3 py-3">
-            <p className="text-center">
-              Nothing to display,{" "}
-              <Link
-                href="create-prompt"
-                className="link underline-offset-2 font-bold text-primary"
-              >
-                Create Prompts
-              </Link>
-            </p>
-          </div>
-        ) : (
+        {filteredFeeds &&
           filteredFeeds.map((feed, index) => (
             <FeedCard
               key={index}
@@ -88,8 +72,7 @@ const Feeds = ({ promptData }) => {
               setSelectedCategory={setSelectedCategory}
               feed={feed}
             />
-          ))
-        )}
+          ))}
       </div>
     </div>
   );
