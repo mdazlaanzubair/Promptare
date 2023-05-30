@@ -11,9 +11,14 @@ const FeedCard = ({ feed }) => {
   const { data: session } = useSession();
 
   return (
-    <div className="card shadow-lg">
+    <div className="card shadow-lg w-full">
       <div className="badge badge-primary cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-primary-focus hover:via-primary hover:to-primary-focus">
-        {feed.category}
+        <CopyToClipboard
+          text={feed.category}
+          onCopy={() => toast("Category Copied!")}
+        >
+          <span>{feed.category}</span>
+        </CopyToClipboard>
       </div>
       <div className="card-body bg-base-100 text-base-content rounded-box">
         <div className="flex flex-row border-b pb-3">
@@ -120,7 +125,9 @@ const FeedCard = ({ feed }) => {
               key={index}
               className="badge cursor-pointer capitalize hover:bg-gradient-to-tr hover:from-neutral-focus hover:via-gray-800 hover:to-neutral-focus"
             >
-              {tag}
+              <CopyToClipboard text={tag} onCopy={() => toast("Tag Copied!")}>
+                <span>{tag}</span>
+              </CopyToClipboard>
             </div>
           ))}
         </div>

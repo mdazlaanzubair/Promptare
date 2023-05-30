@@ -6,8 +6,8 @@ const EditPrompt = async ({ params }) => {
 
   return (
     <section id="feeds-page">
-      <div className="hero min-h-screen bg-base-100">
-        <div className="hero-content flex-col lg:flex-row-reverse px-10 lg:px-20">
+      <div className="hero bg-base-100">
+        <div className="hero-content px-10 lg:px-20">
           {promptToEdit && (
             <UpdateForm
               creatorId={promptToEdit.creator._id}

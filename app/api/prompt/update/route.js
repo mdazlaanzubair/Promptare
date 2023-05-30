@@ -26,7 +26,9 @@ export const PUT = async (req) => {
       await existingPrompt.save();
 
       return new Response(
-        JSON.stringify({ msg: "Prompt has been successfully updated!" }),
+        JSON.stringify({
+          msg: "Prompt has been successfully updated!",
+        }),
         { status: 200 }
       );
     } else {

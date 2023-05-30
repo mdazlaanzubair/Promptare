@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 // PROMPT FUNCTION - INDEX
 export const getAllPrompts = async () => {
   try {
-    const response = await axios.get(`${process.env.API_BASE_URL}/api/prompt/`);
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/`
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -16,7 +18,7 @@ export const getAllPrompts = async () => {
 export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
   try {
     const response = await axios.post(
-      `${process.env.API_BASE_URL}/api/prompt/new`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/new`,
       {
         prompt: {
           prompt,
@@ -29,6 +31,7 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
 
     if (response.status === 201) {
       toast(response.data.msg);
+      return;
     }
   } catch (error) {
     console.log(error);
@@ -40,7 +43,7 @@ export const create_new_prompt = async ({ prompt, category, tags, userId }) => {
 export const getPromptById = async (promptId) => {
   try {
     const response = await axios.get(
-      `${process.env.API_BASE_URL}/api/prompt/${promptId}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/${promptId}`
     );
     return response.data;
   } catch (error) {
@@ -53,7 +56,7 @@ export const getPromptById = async (promptId) => {
 export const updatePromptToDb = async (promptId, updatedPrompt) => {
   try {
     const response = await axios.put(
-      `${process.env.API_BASE_URL}/api/prompt/update`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/update`,
       {
         promptId,
         updatedPrompt,
@@ -61,11 +64,13 @@ export const updatePromptToDb = async (promptId, updatedPrompt) => {
     );
 
     if (response.status === 200) {
-      const data = response.data;
-      console.log(data.msg);
+      toast(response.data.msg);
+      return;
+      // toast(response.data.msg);
     }
   } catch (error) {
     console.log(error);
+    console.log(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/update`);
     console.log("Something went wrong!");
   }
 };
@@ -74,15 +79,16 @@ export const updatePromptToDb = async (promptId, updatedPrompt) => {
 export const deletePrompt = async (promptId) => {
   try {
     const response = await axios.delete(
-      `${process.env.API_BASE_URL}/api/prompt/delete`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/delete`,
       {
         data: { promptId },
       }
     );
 
     if (response.status === 200) {
-      const data = response.data;
-      console.log(data.msg);
+      console.log(response.data.msg);
+      toast(response.data.msg);
+      return;
     }
   } catch (error) {
     console.log(error);
@@ -94,7 +100,7 @@ export const deletePrompt = async (promptId) => {
 export const populate_default_prompts = async () => {
   try {
     const response = await axios.post(
-      `${process.env.API_BASE_URL}/api/prompt/default-prompts`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/default-prompts`,
       {
         isDefault: true,
       }
@@ -102,6 +108,7 @@ export const populate_default_prompts = async () => {
 
     if (response.status === 201) {
       toast(response.data.msg);
+      return;
     }
   } catch (error) {
     console.log(error);
@@ -113,7 +120,7 @@ export const populate_default_prompts = async () => {
 export const getUserProfileData = async (userId) => {
   try {
     const response = await axios.get(
-      `${process.env.API_BASE_URL}/api/profile/${userId}`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/profile/${userId}`
     );
     return response.data;
   } catch (error) {
@@ -126,7 +133,7 @@ export const getUserProfileData = async (userId) => {
 export const getAllUsers = async () => {
   try {
     const response = await axios.get(
-      `${process.env.API_BASE_URL}/api/profile/`
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/profile/`
     );
     return response.data.users;
   } catch (error) {

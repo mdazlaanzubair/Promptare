@@ -18,17 +18,17 @@ const ProfileCard = ({ user, promptCount }) => {
         <h2 className="card-title">{user.full_name}</h2>
         <a
           href={`mailto:${user.email}`}
-            className="lowercase text-xs text-primary font-medium hover:underline underline-offset-2"
+          className="lowercase text-xs text-primary font-medium hover:underline underline-offset-2"
         >
           {user.email}
         </a>
 
-        <button
-          type="button"
+        <a
+          href="#create-prompt"
           className="btn btn-primary btn-outline btn-xs px-10 border capitalize hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
         >
-          Edit Profile
-        </button>
+          Create Prompt
+        </a>
 
         {promptCount > 0 ? (
           <>

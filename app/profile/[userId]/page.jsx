@@ -1,3 +1,4 @@
+import CreateForm from "@components/CreateForm";
 import Feeds from "@components/Feeds";
 import ProfileCard from "@components/ProfileCard";
 import { getUserProfileData } from "@utils/dbFunctions";
@@ -15,6 +16,8 @@ const ProfilePage = async ({ params }) => {
               user={userData.user}
               promptCount={userData.prompts.length}
             />
+            <div className="divider mt-10 mb-5 font-bold">Create Prompts</div>
+            <CreateForm />
           </div>
           <div className="col-span-3">
             <div className="flex flex-col items-center align-middle mt-20">

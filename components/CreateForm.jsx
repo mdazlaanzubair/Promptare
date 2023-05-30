@@ -56,7 +56,7 @@ const CreateForm = () => {
   };
 
   return (
-    <form className="w-full text-start" onSubmit={createPrompt}>
+    <form id="create-prompt" className="w-full text-start" onSubmit={createPrompt}>
       <div className="form-control mb-3">
         <label className="label">
           <span className="label-text font-bold">Prompt</span>

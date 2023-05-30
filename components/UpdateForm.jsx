@@ -51,9 +51,9 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
         });
 
         // emptying form data
-        setPrompt("");
-        setSelectedCategory({});
-        setSelectedTags([]);
+        // setPrompt("");
+        // setSelectedCategory({});
+        // setSelectedTags([]);
         setIsSubmitting(false);
       }
     } else {
@@ -104,8 +104,11 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
   }, [selectedCategory]);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-between">
-      <div className="col-span-1">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-start">
+      <div className="col-span-2">
+        {liveFeedUpdate && <FeedCard feed={liveFeedUpdate} />}
+      </div>
+      <div className="col">
         <form className="w-full text-start" onSubmit={updatePrompt}>
           <div className="form-control mb-3">
             <label className="label">
@@ -115,7 +118,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
               type="text"
               className="textarea focus:textarea-primary textarea-bordered focus:outline-none"
               placeholder="Type your prompt here . . ."
-              rows={3}
+              rows={5}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
@@ -164,9 +167,6 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
             )}
           </div>
         </form>
-      </div>
-      <div className="col-span-2">
-        {liveFeedUpdate && <FeedCard feed={liveFeedUpdate} />}
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const CategoryFilters = ({ setSelectedCategory }) => {
 
   return (
     <Select
-      placeholder="Filter by segments"
+      placeholder="Filter by category"
       options={categoryFilter}
       onChange={setSelectedCategory}
     />
