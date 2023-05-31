@@ -50,11 +50,8 @@ const Users = ({ users }) => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-center">
         {filteredUsers &&
           filteredUsers.map((user, index) => (
-            <Link href={`/profile/${user._id}`}>
-              <div
-                key={index}
-                className="card bg-gradient-to-tr bg-neutral-focus via-neutral to-neutral-focus text-neutral-content shadow-xl px-5 py-10"
-              >
+            <Link href={`/profile/${user._id}`} key={index}>
+              <div className="card bg-gradient-to-tr bg-neutral-focus via-neutral to-neutral-focus text-neutral-content shadow-xl px-5 py-10">
                 <figure>
                   <div className="w-20 mask mask-squircle bg-base-200">
                     <Image
