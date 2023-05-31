@@ -29,7 +29,6 @@ const ProfileCard = ({ user, promptCount }) => {
         >
           Create Prompt
         </a>
-
         {promptCount > 0 ? (
           <>
             <div className="divider mt-10 mb-5">

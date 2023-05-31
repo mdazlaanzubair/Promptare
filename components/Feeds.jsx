@@ -1,4 +1,5 @@
 "use client";
+
 import CategoryFilters from "@components/CategoryFilters";
 import SearchInput from "@components/SearchInput";
 import { searchByCategory, searchByText } from "@utils/feedFilters";
@@ -6,6 +7,7 @@ import { useEffect, useState } from "react";
 import FeedCard from "./FeedCard";
 
 const Feeds = ({ promptData }) => {
+
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState({
     label: "All",

@@ -121,6 +121,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
               rows={5}
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
+              readOnly={session.user.id === creatorId ? "" : "readOnly"}
             />
           </div>
           <div className="form-control mb-3">
@@ -132,6 +133,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
               placeholder="Choose segment..."
               onChange={setSelectedCategory}
               value={selectedCategory}
+              isDisabled={session.user.id === creatorId ? false : true}
             />
           </div>
           <div className="form-control mb-3">
@@ -144,6 +146,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
               value={selectedTags}
               onChange={setSelectedTags}
               placeholder="Choose segment..."
+              disabled={session.user.id === creatorId ? false : true}
             />
           </div>
           <div className="form-control">
@@ -153,7 +156,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
                 className="btn btn-primary btn-disabled capitalize loading"
                 disabled
               >
-                Creating
+                Updating
               </button>
             ) : (
               <>
@@ -161,7 +164,7 @@ const UpdateForm = ({ creatorId, promptToEdit }) => {
                   type="submit"
                   className="btn mb-2 border-none text-neutral-content capitalize bg-gradient-to-r from-primary via-primary to-primary hover:bg-gradient-to-r hover:from-primary-focus hover:via-primary hover:to-primary-focus"
                 >
-                  Create Prompt
+                  Update Prompt
                 </button>
               </>
             )}
