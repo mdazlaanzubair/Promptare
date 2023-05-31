@@ -79,7 +79,7 @@ export const updatePromptToDb = async (promptId, updatedPrompt) => {
 export const deletePrompt = async (promptId) => {
   try {
     const response = await axios.delete(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/delete`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/prompt/delete/${promptId}`,
       {
         data: { promptId },
       }

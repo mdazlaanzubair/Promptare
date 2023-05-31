@@ -5,6 +5,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { deletePrompt } from "@utils/dbFunctions";
 
 const FeedCard = ({ feed }) => {
   // getting logged in user session
@@ -86,7 +87,9 @@ const FeedCard = ({ feed }) => {
                     <Link href={`/feeds/${feed._id}`}>Edit</Link>
                   </li>
                   <li>
-                    <a>Delete</a>
+                    <a onClick={async () => await deletePrompt(feed._id)}>
+                      Delete
+                    </a>
                   </li>
                 </ul>
               </div>

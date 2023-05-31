@@ -1,8 +1,12 @@
 import Prompt from "@models/prompt";
 import { connectToDB } from "@utils/database";
 
-export const DELETE = async (req) => {
-  const { promptId } = await req.json();
+export const DELETE = async (req, { params }) => {
+  if (req.method !== "DELETE") {
+    return new Response(JSON.stringify({ msg: "Method Not Allowed" }), {
+      status: 405,
+    });
+  }
 
   // connecting to the database using try/catch block
   try {
@@ -11,15 +15,8 @@ export const DELETE = async (req) => {
 
     // if connection successful
     if (dbConnectionStatus) {
-      const existingPrompt = await Prompt.findById(promptId);
-
-      if (!existingPrompt) {
-        return new Response(JSON.stringify({ msg: "Prompt not found" }), {
-          status: 404,
-        });
-      }
-
-      await existingPrompt.remove();
+      // Find the prompt by ID and remove it
+      await Prompt.findByIdAndRemove(params.promptId);
 
       return new Response(
         JSON.stringify({ msg: "Prompt has been successfully deleted" }),
